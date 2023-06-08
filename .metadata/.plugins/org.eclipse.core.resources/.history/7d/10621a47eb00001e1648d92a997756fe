@@ -1,0 +1,29 @@
+package sample38;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		/*
+		 	날짜 + 시간 클래스
+		 	Calendar --> 일정관리 
+		 	Date 
+		 	
+		 */
+		
+		// Calendar cal = new GregorianCalendar();
+		Calendar cal = Calendar.getInstance(); // 이게 더 편리함
+		
+		// 오늘 날짜
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH);
+		int day = cal.get(Calendar.DATE);
+		int hour = cal.get(Calendar.HOUR);
+		int minute = cal.get(Calendar.MINUTE);
+		
+		System.out.println(year);
+	}
+
+}

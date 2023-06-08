@@ -1,0 +1,71 @@
+package dao;
+
+// Data Access Object
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
+import dto.AddressDto;
+
+public class AddressDao {
+	
+    // 데이터를 편집하는 클래스
+    Scanner sc = new Scanner(System.in);
+    final int COUNT = 100;
+    
+    // 주소를 저장할 100개의 instance
+    private AddressDto[] addressBook = new AddressDto[COUNT];
+    private int counter;
+
+    public AddressDao() {
+        counter = 0;
+    }
+
+    public void insert() {
+        System.out.println("데이터를 추가합니다.");
+        System.out.print("이름 : ");
+        String name = sc.next();
+        System.out.print("나이 : ");
+        int age = sc.nextInt();
+        System.out.print("전화번호 : ");
+        String phone = sc.next();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("주소 : ");
+        String address = "";
+        try {
+            address = br.readLine();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.print("메모 : ");
+        String memo = "";
+        try {
+            memo = br.readLine();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        addressBook[counter] = new AddressDto(name, age, phone, address, memo);
+        counter++;
+    }
+
+    public void delete() {      // 숫자는 0으로, 이름은 빈문자열로
+
+    }
+
+    public void select() {      // 이름으로 검색
+
+    }
+
+    public void update() {      // 전화번호, 주소, 메모만 바뀌게
+
+    }
+
+    public void allDataPrint() { // 확인
+        for(int i=0; i<addressBook.length; i++) {
+            if(addressBook[i]!= null) {
+                System.out.println(addressBook[i].toString());
+            }
+        }
+    }
+
+}

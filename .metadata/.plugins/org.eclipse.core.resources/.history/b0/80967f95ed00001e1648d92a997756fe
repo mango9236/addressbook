@@ -1,0 +1,50 @@
+package sample38;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		/*
+		 	날짜 + 시간 클래스
+		 	Calendar --> 일정관리 
+		 	Date 
+		 	
+		 */
+		
+		// Calendar cal = new GregorianCalendar();
+		Calendar cal = Calendar.getInstance(); // 이게 더 편리함
+		
+		// 오늘 날짜 얻어오기(get)
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH); // 월은 0 ~ 11월 
+		int day = cal.get(Calendar.DATE);
+		int hour = cal.get(Calendar.HOUR);
+		int minute = cal.get(Calendar.MINUTE);
+		
+		// 날짜 출력
+		System.out.println(year+"/"+ two(month+1+"")+"/"+day+" "+hour+":"+minute);
+		
+		// 날짜 세팅(set) + 세팅한 것을 얻어오기(get)
+		cal.set(Calendar.YEAR, 2023);
+		cal.set(Calendar.MONTH, 4 - 1); // 일부러 알아보기 쉽게 4 - 1 (4월)
+		cal.set(Calendar.DATE, 28);
+		
+		year = cal.get(Calendar.YEAR);
+		month = cal.get(Calendar.MONTH); // 월은 0~11월 
+		day = cal.get(Calendar.DATE);
+		
+		// 세팅된 날짜 출력
+		System.out.println(year+"/"+two(month+1+"")+"/"+day);
+		
+		
+	}
+	
+	// utility 함수
+	// 날짜 두자리 표기 -- ex) 1일 --> 01로 표현
+	public static String two(String s) {
+		return s.length() > 1? s : "0" + s; // 길이가 1보다 크면 그대로, 아니면 0붙혀서
+	}
+
+}

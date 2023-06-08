@@ -1,0 +1,23 @@
+package work7;
+
+public class Batter extends Human{
+	private int batcount;
+	private int hit;
+	private double hitavg; //타율
+	
+	public Batter() {
+		
+	}
+	
+	public Batter(int number, String name, double height, int batcount, int hit, double hitavg) {
+		super(number, name, height);
+		this.batcount = batcount;
+		this.hit = hit;
+		this.hitavg = hitavg;
+		
+	}
+	public String toString() {
+		return 
+	}
+}
+

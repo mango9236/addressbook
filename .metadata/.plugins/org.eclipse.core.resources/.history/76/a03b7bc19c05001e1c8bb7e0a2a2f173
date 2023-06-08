@@ -1,0 +1,67 @@
+package main;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		/* 링크리스트 */
+		List<String> list = new LinkedList<String>();
+		
+		list.add(new String("giants"));
+		list.add(new String("tigers"));
+		list.add(new String("twins"));
+		list.add("이렇게도 넣어짐");
+		
+		list.remove(1); // 지우기
+		
+		String team = new String("bears");
+		list.set(1, team); // set
+		
+		// 모든 값 순회
+		for (int i=0;i<list.size();i++) {
+			System.out.println(list.get(i));
+		}
+		
+		// 링크리스트 -> 배열리스트: 서로 호환이 됩니다.
+		List<String> arrlist = new ArrayList<String>(list);  
+		for (String s: arrlist) {
+			System.out.println(s);
+		}
+		
+		
+		/* HashMap */
+		HashMap<Integer, String> hashMap = new HashMap<Integer, String>();
+		// 부모 인스턴스로 자식클래스 생성 (Map interface -> HashMap)
+		Map<Integer, String> hashMap2 = new HashMap<Integer, String>();
+		
+		// 1. 추가
+		hashMap.put(25, "최민규");
+		hashMap.put(27, "김현민");
+		hashMap.put(26, "최영석");
+		
+		// 1-1. 값 얻기 (key -> value 얻기)
+		String value = hashMap.get(25);
+		System.out.println(value);
+		
+		// 2. 삭제
+		// hashMap.remove(26);
+		// 3. 검색
+		
+		// 4. 수정
+		
+		// 5. 값을 모두 출력
+		// iterator : 반복자(주소) -> key값
+		Iterator<Integer> iter = hashMap.keySet().iterator(); // 처음 주소로 keySet()
+		while(iter.hasNext()) { // hasNext(): 다음것을 가지고 있는지 -> boolean
+			Integer key = iter.next(); 
+			System.out.println("key: " + key);
+		}
+	}
+
+}

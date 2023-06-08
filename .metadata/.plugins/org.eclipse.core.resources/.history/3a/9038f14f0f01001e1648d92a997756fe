@@ -1,0 +1,176 @@
+package dao;
+
+// Data Access Object
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
+import dto.AddressDto;
+
+public class AddressDao {
+	
+    // 데이터를 편집하는 클래스
+    Scanner sc = new Scanner(System.in);
+    final int COUNT = 100;
+    
+    // 주소를 저장할 100개의 instance
+    private AddressDto[] addressBook = new AddressDto[COUNT];
+    private int counter;
+
+    public AddressDao() {
+        counter = 0;
+    }
+
+	/* 1. 추가 */
+    public void insert() {
+        System.out.println("데이터를 추가합니다.");
+        System.out.print("이름 : ");
+        String name = sc.next();
+        
+        System.out.print("나이 : ");
+        int age = sc.nextInt();
+        
+        System.out.print("전화번호 : ");
+        String phone = sc.next();
+        
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("주소 : ");
+        String address = "";
+        try {
+            address = br.readLine();
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        System.out.print("메모 : ");
+        String memo = "";
+        try {
+            memo = br.readLine();
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        addressBook[counter] = new AddressDto(name, age, phone, address, memo);
+        counter++;
+    }
+    
+	/* 2. 삭제 -- 숫자는 0으로, 이름은 빈문자열로 */ 
+    public void delete() {      
+    	System.out.println("데이터를 삭제합니다.");
+        System.out.print("이름: ");
+        String name = sc.next();
+        
+        // 전화번호부 돌면서 입력받은 이름이랑 배열의 이름이 같으면 
+        for (int i = 0; i < counter; i++) {
+            if (addressBook[i] != null && addressBook[i].getName().equals(name)) {
+                addressBook[i] = null;
+                System.out.println("데이터를 삭제했습니다.");
+                return; 
+            }
+        }
+        System.out.println("해당 이름은 전화번호부에 없습니다."); // for문 다 돌아도 없으면 전화번호부에 등록 x
+    }
+    
+	/* 3. 검색 -- 이름으로 검색 */
+    public void select() { 
+    	System.out.println("데이터를 조회합니다.");
+        System.out.print("이름: ");
+        String name = sc.next();
+        int name_cnt = 0; // 조회 이름 갯수
+        
+        // 이름이 똑같으면 정보를 toString으로 불러옴
+        for (int i = 0; i < counter; i++) {
+            if (addressBook[i] != null && addressBook[i].getName().equals(name)) {
+                System.out.println(addressBook[i].toString());
+                name_cnt += 1;
+            }
+        }
+        if (name_cnt == 0) {
+        	System.out.println("해당 이름은 전화번호부에 없습니다.");}
+    }
+    
+	/* 4. 수정 -- 전화번호, 주소, 메모만 바뀌게 */
+    public void update() {      
+    	System.out.println("데이터를 수정합니다.");
+        System.out.print("이름: ");
+        String name = sc.next();
+        for (int i = 0; i < counter; i++) {
+            if (addressBook[i] != null && addressBook[i].getName().equals(name)) {
+                System.out.print("새로운 전화번호: ");
+                String new_phone = sc.next();
+                System.out.print("새로운 주소: ");
+                String new_address = sc.next();
+                System.out.print("새로운 메모: ");
+                String new_memo = sc.next();
+                
+                // 새로운 정보들을 set
+                addressBook[i].setPhone(new_phone);
+                addressBook[i].setAddress(new_address);
+                addressBook[i].setMemo(new_memo);
+                System.out.println("데이터를 수정했습니다.");
+                return;
+            }
+        }
+        System.out.println("해당 이름은 전화번호부에 없습니다.");
+    }
+
+    /* 5. 모든 주소록 출력 */
+    public void allDataPrint() { 
+        for(int i=0; i<addressBook.length; i++) {
+            if(addressBook[i]!= null) {
+                System.out.println("[등록]"+(i+1)+"번째 : "+addressBook[i].toString());
+            }
+        }
+    }
+    
+    /* 6. 저장 */
+    public void Save() throws IOException {
+    	File file = new File("C:\\Users\\교육생38\\Desktop\\최민규\\adrressBook.txt");
+    	FileWriter fw = new FileWriter(file);
+    	
+    	if(file.exists()) {
+    		System.out.println("전화번호부를 저장합니다.");
+    		for(int i=0; i<addressBook.length; i++) {
+                if(addressBook[i]!= null) {
+                	fw.write(addressBook[i].getName()+"-"+addressBook[i].getAge()+"-"+addressBook[i].getPhone()+"-"+addressBook[i].getAddress()+"-"+addressBook[i].getMemo()+"\n");    
+                }
+            }
+    		fw.close();
+    		System.out.println("성공적으로 저장하였습니다.");
+    	}
+    	else {
+    		file.createNewFile();
+    		System.out.println("등록된 파일이 없으므로 새 전화번호부를 저장합니다.");
+    		for(int i=0; i<addressBook.length; i++) {
+                if(addressBook[i]!= null) {
+                    fw.write(addressBook[i].getName()+"-"+addressBook[i].getAge()+"-"+addressBook[i].getPhone()+"-"+addressBook[i].getAddress()+"-"+addressBook[i].getMemo()+"\n");    
+                }
+            }
+    		fw.close();
+    		System.out.println("성공적으로 저장하였습니다.");
+    	}
+    }
+    
+    /* 7. 불러오기 */
+    public void load() throws IOException {
+    	File file = new File("C:\\Users\\교육생38\\Desktop\\최민규\\adrressBook.txt");
+    	FileReader fr = new FileReader(file);
+    	BufferedReader br = new BufferedReader(fr);
+    	String str = br.readLine();
+    	String arr[] = str.split("-"); // 토큰으로 구분
+    	System.out.println(arr.toString());
+    	
+		while( str != null ) { // 문장이 null이 아닐때까지 읽기
+			System.out.println(str);			
+			str = br.readLine();
+		}
+    }
+}
+
+

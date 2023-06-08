@@ -1,0 +1,43 @@
+package main;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		/*
+		 	abstract class: method + abstract method + variable
+		 	
+		 	interface: 	abstract method, 다중상속이 가능하다.
+		 				class의 설계 사양을 빠르게 파악할 수 있다.
+		 				확장성
+		 */
+		
+		MyClass mycls = new MyClass();
+		mycls.func();
+		
+		YouClass youcls = new YouClass();
+		youcls.method();
+		
+		// 인터페이스가 부모 
+		YouInterface yi = new YouClass();
+		yi.method();
+		
+		YouInterface yiOne = new YouInterface() { // 잠깐 임시적으로 쓸때 -> 오버라이딩 해주기
+			
+			@Override
+			public void method() {
+				System.out.println("YouInterface Method()");
+			}
+		};
+		yiOne.method();
+		
+		
+		HeClass hc = new HeClass();
+		hc.func();
+		hc.method();
+		
+		// MyInterface myinter = new HeClass(); --> 잘 쓰지 않는 방법
+		// myinter.func();
+		// myinter.method();
+	}
+
+}

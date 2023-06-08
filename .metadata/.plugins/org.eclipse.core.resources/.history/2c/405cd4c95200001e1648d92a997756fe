@@ -1,0 +1,23 @@
+package cls;
+
+public class Pitcher extends Human{
+	private int win;
+	private int lose;
+	private double defence; //방어율
+	
+	public Pitcher() {
+	}
+	
+	public Pitcher(int number, String name, double height, int win, int lose, double defence) {
+		super(number, name, height);
+		this.win = win;
+		this.lose = lose;
+		this.defence = defence;
+		
+	}
+	
+	@Override // 지시문
+	public String toString() {
+		return "Pitcher 승: " + win + "패: " + lose + "방어율: " + defence + super.toString();
+	}
+}

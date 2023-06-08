@@ -1,0 +1,52 @@
+package sample37;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		/*  
+		 	static: 정적 != 동적, 메모리의 공간을 기준으로 
+		 	
+		 	int arr[] = new int[5];  -> 00000
+		 	
+		 	stack: 지역변수, 매개변수
+		 	heap: 동적으로 할당된 영역(배열, 클래스)
+		 	static: 전역변수, 메모리 공간 무조건 확보, 꺼지면 없어짐
+		 	
+		*/
+		
+		// mycls: 매개변수(인스턴스) --> stack 
+		// new Myclass(): 동적할당 --> heap
+		Myclass mycls = new Myclass();
+		mycls.method(100);
+		
+		
+		/*
+		 	mycls.num = 10; // 인스턴스 할당후 사용가능 
+		 	Myclass.global_num = 10; // 호출시 클래스.전역변수, 그냥 바로 사용가능
+		*/
+		
+		Myclass cls2 = new Myclass();
+		cls2.method(1);
+		cls2.method(1);
+		
+		Myclass cls3 = new Myclass();
+		cls3.method(2); 
+		
+		Myclass.global_num++;
+		System.out.println("전역변수: "+ Myclass.global_num);
+	}
+
+}
+
+class Myclass{
+	public int num; // (클래스) 멤버변수(자동 초기화 = 0)
+	
+	static int global_num; // static --> 전역변수, 정적변수(자동 초기화 = 0)
+	
+	public void method(int num) { // --> 매개변수(지역)
+		int cnt; // 지역(local)변수
+		
+		global_num++;
+		System.out.println("전역변수: "+ global_num);
+	}
+}

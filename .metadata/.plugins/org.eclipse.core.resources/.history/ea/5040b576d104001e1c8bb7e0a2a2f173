@@ -1,0 +1,18 @@
+package main;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		/*
+		 	abstract class: method + abstract method + variable
+		 	
+		 	interface: 	abstract method, 다중상속이 가능하다.
+		 				class의 설계 사양을 빠르게 파악할 수 있다.
+		 				확장성
+		 */
+		
+		MyClass mycls = new MyClass();
+		mycls.func();
+	}
+
+}

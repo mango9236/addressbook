@@ -1,0 +1,23 @@
+package main;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		List<String> list = new LinkedList<String>();
+		
+		list.add(new String("giants"));
+		list.add(new String("tigers"));
+		list.add(new String("twins"));
+		list.add("이렇게도 넣어짐");
+		
+		list.remove(1);
+		for (int i=0;i<list.size();i++) {
+			System.out.println(list.get(i));
+		}
+		String team = new String("bears");
+	}
+
+}

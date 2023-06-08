@@ -1,0 +1,16 @@
+package main;
+
+public class HeClass implements YouInterface, MyInterface { // 인터페이스는 다중상속가능
+		
+	// 만들때 add해주거나 or f2 add 해주거나
+	@Override
+	public void func() {
+		System.out.println("HeClass func()");
+	}
+
+	@Override
+	public void method() {
+		System.out.println("HeClass Method()");
+	}
+
+}
